@@ -116,7 +116,7 @@ app.controller("cuentaController",['$rootScope','$scope','$window', '$location',
 			cuentaservice.eliminarCuenta(cuenta).then(function(send) {	
 				alert("Cuenta Eliminada");
 				$location.path("/cuentas");
-				$window.location.reload();
+//				$window.location.reload();
 			}) 
 				
 			  

@@ -220,7 +220,7 @@ app.controller("ListaPagoController",['$rootScope', '$scope','$cookieStore', '$w
 	$scope.ver = function(data) {
 		
 		$location.path("/ordenTrabajo");
-		$window.location.reload();
+//		$window.location.reload();
 		$cookieStore.put("idOt",data)
 //		$scope.listClient=data;
 	}

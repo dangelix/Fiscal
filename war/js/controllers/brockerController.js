@@ -260,7 +260,7 @@ app.controller("brockersController",['$rootScope','usuarioservice','$scope','$wi
 				brockerservice.eliminacuentabrocker(bcuenta).then(function(send) {	
 					alert("Cuenta del Cliente Eliminado");
 					$location.path("/listaBrocker");
-					$window.location.reload();
+//					$window.location.reload();
 					
 				}) 
 					
@@ -374,7 +374,7 @@ app.controller("brockersController",['$rootScope','usuarioservice','$scope','$wi
 				alert("Brocker Eliminado");
 //				$('.modalgif').modal('show');
 				$location.path("/listaBrocker");
-				$window.location.reload();
+//				$window.location.reload();
 			}) 
 				
 			  

@@ -99,7 +99,7 @@ app.controller("empresacontroller",['$rootScope','$scope','$window', '$location'
 			empresaservice.eliminarEmpresa(cuenta).then(function(data) {	
 				alert("Empresa Eliminada");
 				$location.path("/listempresa");
-				$window.location.reload();
+//				$window.location.reload();
 			}) 
 				
 			  

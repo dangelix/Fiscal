@@ -626,7 +626,7 @@ app.controller("CAController",['$rootScope', '$scope','$cookieStore', '$window',
 			            CBService.updateCliente(cliente);
 						showAlert("Alta de Orden de trabajo Exitosa");
 						$location.path("/listaOTs");
-						$window.location.reload();
+//						$window.location.reload();
 					});
 					
 				}else{

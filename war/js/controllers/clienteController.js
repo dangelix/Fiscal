@@ -307,7 +307,7 @@ app.controller("clientController",['$http','$interval','$rootScope','usuarioserv
 				setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 			    setTimeout(function(){ if($scope.client){window.location="#/clientes";} }, 3000);
 	//			$location.path("/clientes");
-				$window.location.reload();
+//				$window.location.reload();
 			}else{
 				$scope.repetidos=data;
 				$("#myModalRepetidos").modal('show');
@@ -324,7 +324,7 @@ app.controller("clientController",['$http','$interval','$rootScope','usuarioserv
 			setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 		    setTimeout(function(){ if($scope.client){window.location="#/clientes";} }, 3000);
 			$location.path("/clientes");
-			$window.location.reload();
+//			$window.location.reload();
 //			setTimeout(window.location.reload.bind(window.location), 1000);
 		})
 	}
@@ -368,7 +368,7 @@ app.controller("clientController",['$http','$interval','$rootScope','usuarioserv
 				clientservice.eliminaCliente(cliente).then(function(send) {	
 					alert("Cliente Eliminado");
 					$location.path("/clientes");
-					$window.location.reload();
+//					$window.location.reload();
 				}) 
 				
 			  
@@ -460,7 +460,7 @@ $scope.eliminarcc = function(cuenta){
 		clientcuentaservice.eliminacuentacliente(cuenta).then(function(send) {	
 			alert("Cuenta del Cliente Eliminado");
 			$location.path("/clientes");
-			$window.location.reload();
+//			$window.location.reload();
 			}) 
 			
 		  

@@ -1182,7 +1182,7 @@ app.controller("OTsAddController",['$rootScope', '$route','$scope','$cookieStore
 					ordenTrabajoservice.addot($scope.otVO).then(function(data){
 						showAlert("Alta de Orden de trabajo Exitosa");
 						$location.path("/listaOTs");
-						 window.location.reload();
+//						 window.location.reload();
 					});
 					
 				}else{
