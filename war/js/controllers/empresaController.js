@@ -187,7 +187,7 @@ app.controller("altaempresacontroller",['$rootScope','$scope','$window', '$locat
 //		    setTimeout(function(){ if($scope.cuenta){window.location="#/listempresa";} }, 3000);
 			alert("Empresa Guardada Con Exito");
 			$location.path("/listempresa");
-			$window.location.reload("/listempresa");
+//			$window.location.reload("/listempresa");
 		});
 		
 	}
