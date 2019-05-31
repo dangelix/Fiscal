@@ -1,0 +1,831 @@
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://tempuri.org/">
+	<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		Timbrado y servicio de aceptación-rechazo de cancelaciones.
+	</wsdl:documentation>
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+			<s:element name="AceptaRechazaCFDI">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcReceptor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="accion"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="AceptaRechazaCFDIResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="AceptaRechazaCFDIResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="ArrayOfAnyType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="anyType"
+						nillable="true" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultaCfdisRelacionados">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcReceptor"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaCfdisRelacionadosResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ConsultaCfdisRelacionadosResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaEstatusSat">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaEstatusSatResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ConsultaEstatusSatResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaEstatusSatExterno">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcReceptor"
+							type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="total"
+							nillable="true" type="s:decimal" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaEstatusSatExternoResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ConsultaEstatusSatExternoResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaPeticionesPendientesCFDI">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcReceptor"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ConsultaPeticionesPendientesCFDIResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ConsultaPeticionesPendientesCFDIResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="AsignaTimbresEmisor">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="noTimbres"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="AsignaTimbresEmisorResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="AsignaTimbresEmisorResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CancelaCFDI">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CancelaCFDIResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="CancelaCFDIResult"
+							type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CancelaCFDIAck">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CancelaCFDIAckResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="CancelaCFDIAckResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CancelaRetencion">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CancelaRetencionResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="CancelaRetencionResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ObtieneCFDI">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ObtieneCFDIResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="ObtieneCFDIResult"
+							type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ObtieneRetencion">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="folioUUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ObtieneRetencionResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ObtieneRetencionResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ObtieneTimbresDisponibles">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ObtieneTimbresDisponiblesResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ObtieneTimbresDisponiblesResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RegistraEmisor">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="rfcEmisor"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="base64Cer"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="base64Key"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="contrasena"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RegistraEmisorResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="RegistraEmisorResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="TimbraCFDI">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="xmlComprobanteBase64" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="idComprobante"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="TimbraCFDIResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="TimbraCFDIResult"
+							type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="TimbraRetencion">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="usuarioIntegrador"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="xmlComprobanteBase64" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="idComprobante"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="TimbraRetencionResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="TimbraRetencionResult" type="tns:ArrayOfAnyType" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="AceptaRechazaCFDISoapIn">
+		<wsdl:part name="parameters" element="tns:AceptaRechazaCFDI" />
+	</wsdl:message>
+	<wsdl:message name="AceptaRechazaCFDISoapOut">
+		<wsdl:part name="parameters" element="tns:AceptaRechazaCFDIResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaCfdisRelacionadosSoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultaCfdisRelacionados" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaCfdisRelacionadosSoapOut">
+		<wsdl:part name="parameters" element="tns:ConsultaCfdisRelacionadosResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaEstatusSatSoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultaEstatusSat" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaEstatusSatSoapOut">
+		<wsdl:part name="parameters" element="tns:ConsultaEstatusSatResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaEstatusSatExternoSoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultaEstatusSatExterno" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaEstatusSatExternoSoapOut">
+		<wsdl:part name="parameters" element="tns:ConsultaEstatusSatExternoResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaPeticionesPendientesCFDISoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultaPeticionesPendientesCFDI" />
+	</wsdl:message>
+	<wsdl:message name="ConsultaPeticionesPendientesCFDISoapOut">
+		<wsdl:part name="parameters"
+			element="tns:ConsultaPeticionesPendientesCFDIResponse" />
+	</wsdl:message>
+	<wsdl:message name="AsignaTimbresEmisorSoapIn">
+		<wsdl:part name="parameters" element="tns:AsignaTimbresEmisor" />
+	</wsdl:message>
+	<wsdl:message name="AsignaTimbresEmisorSoapOut">
+		<wsdl:part name="parameters" element="tns:AsignaTimbresEmisorResponse" />
+	</wsdl:message>
+	<wsdl:message name="CancelaCFDISoapIn">
+		<wsdl:part name="parameters" element="tns:CancelaCFDI" />
+	</wsdl:message>
+	<wsdl:message name="CancelaCFDISoapOut">
+		<wsdl:part name="parameters" element="tns:CancelaCFDIResponse" />
+	</wsdl:message>
+	<wsdl:message name="CancelaCFDIAckSoapIn">
+		<wsdl:part name="parameters" element="tns:CancelaCFDIAck" />
+	</wsdl:message>
+	<wsdl:message name="CancelaCFDIAckSoapOut">
+		<wsdl:part name="parameters" element="tns:CancelaCFDIAckResponse" />
+	</wsdl:message>
+	<wsdl:message name="CancelaRetencionSoapIn">
+		<wsdl:part name="parameters" element="tns:CancelaRetencion" />
+	</wsdl:message>
+	<wsdl:message name="CancelaRetencionSoapOut">
+		<wsdl:part name="parameters" element="tns:CancelaRetencionResponse" />
+	</wsdl:message>
+	<wsdl:message name="ObtieneCFDISoapIn">
+		<wsdl:part name="parameters" element="tns:ObtieneCFDI" />
+	</wsdl:message>
+	<wsdl:message name="ObtieneCFDISoapOut">
+		<wsdl:part name="parameters" element="tns:ObtieneCFDIResponse" />
+	</wsdl:message>
+	<wsdl:message name="ObtieneRetencionSoapIn">
+		<wsdl:part name="parameters" element="tns:ObtieneRetencion" />
+	</wsdl:message>
+	<wsdl:message name="ObtieneRetencionSoapOut">
+		<wsdl:part name="parameters" element="tns:ObtieneRetencionResponse" />
+	</wsdl:message>
+	<wsdl:message name="ObtieneTimbresDisponiblesSoapIn">
+		<wsdl:part name="parameters" element="tns:ObtieneTimbresDisponibles" />
+	</wsdl:message>
+	<wsdl:message name="ObtieneTimbresDisponiblesSoapOut">
+		<wsdl:part name="parameters" element="tns:ObtieneTimbresDisponiblesResponse" />
+	</wsdl:message>
+	<wsdl:message name="RegistraEmisorSoapIn">
+		<wsdl:part name="parameters" element="tns:RegistraEmisor" />
+	</wsdl:message>
+	<wsdl:message name="RegistraEmisorSoapOut">
+		<wsdl:part name="parameters" element="tns:RegistraEmisorResponse" />
+	</wsdl:message>
+	<wsdl:message name="TimbraCFDISoapIn">
+		<wsdl:part name="parameters" element="tns:TimbraCFDI" />
+	</wsdl:message>
+	<wsdl:message name="TimbraCFDISoapOut">
+		<wsdl:part name="parameters" element="tns:TimbraCFDIResponse" />
+	</wsdl:message>
+	<wsdl:message name="TimbraRetencionSoapIn">
+		<wsdl:part name="parameters" element="tns:TimbraRetencion" />
+	</wsdl:message>
+	<wsdl:message name="TimbraRetencionSoapOut">
+		<wsdl:part name="parameters" element="tns:TimbraRetencionResponse" />
+	</wsdl:message>
+	<wsdl:portType name="TimbradoSoap">
+		<wsdl:operation name="AceptaRechazaCFDI">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				Servicio de aceptación-rechazo de peticiones de cancelación
+			</wsdl:documentation>
+			<wsdl:input message="tns:AceptaRechazaCFDISoapIn" />
+			<wsdl:output message="tns:AceptaRechazaCFDISoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaCfdisRelacionados">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				Servicio de aceptación-rechazo de peticiones de cancelación
+			</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaCfdisRelacionadosSoapIn" />
+			<wsdl:output message="tns:ConsultaCfdisRelacionadosSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaEstatusSat">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				consulta de estatus de cfdi en el Sat.</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaEstatusSatSoapIn" />
+			<wsdl:output message="tns:ConsultaEstatusSatSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaEstatusSatExterno">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				consulta de estatus de cfdi.</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaEstatusSatExternoSoapIn" />
+			<wsdl:output message="tns:ConsultaEstatusSatExternoSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaPeticionesPendientesCFDI">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				Servicio de consulta de peticiones pendientes de cancelación
+			</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaPeticionesPendientesCFDISoapIn" />
+			<wsdl:output message="tns:ConsultaPeticionesPendientesCFDISoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="AsignaTimbresEmisor">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				Servicio de asignación de timbres para Integradores
+			</wsdl:documentation>
+			<wsdl:input message="tns:AsignaTimbresEmisorSoapIn" />
+			<wsdl:output message="tns:AsignaTimbresEmisorSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CancelaCFDI">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				cancelación CFDI</wsdl:documentation>
+			<wsdl:input message="tns:CancelaCFDISoapIn" />
+			<wsdl:output message="tns:CancelaCFDISoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CancelaCFDIAck">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				cancelación CFDI con acuse</wsdl:documentation>
+			<wsdl:input message="tns:CancelaCFDIAckSoapIn" />
+			<wsdl:output message="tns:CancelaCFDIAckSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CancelaRetencion">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				cancelación de retenciones y pagos</wsdl:documentation>
+			<wsdl:input message="tns:CancelaRetencionSoapIn" />
+			<wsdl:output message="tns:CancelaRetencionSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneCFDI">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				consulta CFDI</wsdl:documentation>
+			<wsdl:input message="tns:ObtieneCFDISoapIn" />
+			<wsdl:output message="tns:ObtieneCFDISoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneRetencion">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				consulta retenciones y pagos</wsdl:documentation>
+			<wsdl:input message="tns:ObtieneRetencionSoapIn" />
+			<wsdl:output message="tns:ObtieneRetencionSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneTimbresDisponibles">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				consulta de timbres para Integradores</wsdl:documentation>
+			<wsdl:input message="tns:ObtieneTimbresDisponiblesSoapIn" />
+			<wsdl:output message="tns:ObtieneTimbresDisponiblesSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="RegistraEmisor">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				registro para emisores</wsdl:documentation>
+			<wsdl:input message="tns:RegistraEmisorSoapIn" />
+			<wsdl:output message="tns:RegistraEmisorSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="TimbraCFDI">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				timbrado para Integradores</wsdl:documentation>
+			<wsdl:input message="tns:TimbraCFDISoapIn" />
+			<wsdl:output message="tns:TimbraCFDISoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="TimbraRetencion">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio de
+				timbrado de retenciones y pagos</wsdl:documentation>
+			<wsdl:input message="tns:TimbraRetencionSoapIn" />
+			<wsdl:output message="tns:TimbraRetencionSoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="TimbradoSoap" type="tns:TimbradoSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="AceptaRechazaCFDI">
+			<soap:operation soapAction="http://tempuri.org/AceptaRechazaCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaCfdisRelacionados">
+			<soap:operation soapAction="http://tempuri.org/ConsultaCfdisRelacionados"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaEstatusSat">
+			<soap:operation soapAction="http://tempuri.org/ConsultaEstatusSat"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaEstatusSatExterno">
+			<soap:operation soapAction="http://tempuri.org/ConsultaEstatusSatExterno"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaPeticionesPendientesCFDI">
+			<soap:operation soapAction="http://tempuri.org/ConsultaPeticionesPendientesCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AsignaTimbresEmisor">
+			<soap:operation soapAction="http://tempuri.org/AsignaTimbresEmisor"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelaCFDI">
+			<soap:operation soapAction="http://tempuri.org/CancelaCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelaCFDIAck">
+			<soap:operation soapAction="http://tempuri.org/CancelaCFDIAck"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelaRetencion">
+			<soap:operation soapAction="http://tempuri.org/CancelaRetencion"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneCFDI">
+			<soap:operation soapAction="http://tempuri.org/ObtieneCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneRetencion">
+			<soap:operation soapAction="http://tempuri.org/ObtieneRetencion"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneTimbresDisponibles">
+			<soap:operation soapAction="http://tempuri.org/ObtieneTimbresDisponibles"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RegistraEmisor">
+			<soap:operation soapAction="http://tempuri.org/RegistraEmisor"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TimbraCFDI">
+			<soap:operation soapAction="http://tempuri.org/TimbraCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TimbraRetencion">
+			<soap:operation soapAction="http://tempuri.org/TimbraRetencion"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="TimbradoSoap12" type="tns:TimbradoSoap">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="AceptaRechazaCFDI">
+			<soap12:operation soapAction="http://tempuri.org/AceptaRechazaCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaCfdisRelacionados">
+			<soap12:operation soapAction="http://tempuri.org/ConsultaCfdisRelacionados"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaEstatusSat">
+			<soap12:operation soapAction="http://tempuri.org/ConsultaEstatusSat"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaEstatusSatExterno">
+			<soap12:operation soapAction="http://tempuri.org/ConsultaEstatusSatExterno"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultaPeticionesPendientesCFDI">
+			<soap12:operation
+				soapAction="http://tempuri.org/ConsultaPeticionesPendientesCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AsignaTimbresEmisor">
+			<soap12:operation soapAction="http://tempuri.org/AsignaTimbresEmisor"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelaCFDI">
+			<soap12:operation soapAction="http://tempuri.org/CancelaCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelaCFDIAck">
+			<soap12:operation soapAction="http://tempuri.org/CancelaCFDIAck"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelaRetencion">
+			<soap12:operation soapAction="http://tempuri.org/CancelaRetencion"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneCFDI">
+			<soap12:operation soapAction="http://tempuri.org/ObtieneCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneRetencion">
+			<soap12:operation soapAction="http://tempuri.org/ObtieneRetencion"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObtieneTimbresDisponibles">
+			<soap12:operation soapAction="http://tempuri.org/ObtieneTimbresDisponibles"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RegistraEmisor">
+			<soap12:operation soapAction="http://tempuri.org/RegistraEmisor"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TimbraCFDI">
+			<soap12:operation soapAction="http://tempuri.org/TimbraCFDI"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="TimbraRetencion">
+			<soap12:operation soapAction="http://tempuri.org/TimbraRetencion"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Timbrado">
+		<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+			Timbrado y servicio de aceptación-rechazo de cancelaciones.
+		</wsdl:documentation>
+		<wsdl:port name="TimbradoSoap" binding="tns:TimbradoSoap">
+			<soap:address
+				location="https://cfdi33-pruebas.buzoncfdi.mx:1443/Timbrado.asmx" />
+		</wsdl:port>
+		<wsdl:port name="TimbradoSoap12" binding="tns:TimbradoSoap12">
+			<soap12:address
+				location="https://cfdi33-pruebas.buzoncfdi.mx:1443/Timbrado.asmx" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

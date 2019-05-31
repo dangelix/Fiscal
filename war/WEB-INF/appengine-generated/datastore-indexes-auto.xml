@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes  autoGenerate="true">
+
+    <!-- Used 3 times in query history -->
+    <datastore-index kind="Cliente" ancestor="false" source="auto">
+        <property name="enabled" direction="asc"/>
+        <property name="tipo" direction="asc"/>
+        <property name="nickname" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

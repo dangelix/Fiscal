@@ -1,0 +1,358 @@
+<section class="jumbotron">
+	<div class="container">
+		<h2>Historial de Movimientos</h2>
+		<submenu perfil="perfilUsuario"/>
+	</div>
+</section>
+<!-- <div class="container"> -->
+<div>
+<div class="container">
+<div calss="row">
+		<div class="col-md-3"> </div>
+		<div class="col-md-3">
+			<div class="input-group">
+						<input id="searchCliente" class="form-control form-control-sm" type="text" ng-model="buscaClient" placeholder="Cliente / Broker" data-provide="typehead" autocomplete="off" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<div class="input-group-btn">
+					<button class="btn btn-default" type="submit"
+						ng-click="filtroCliente()">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="input-group">
+						<input id="searchEmpresa" class="form-control form-control-sm" type="text" ng-model="buscaEmpresa" placeholder="Empresa" data-provide="typehead" autocomplete="off" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<div class="input-group-btn">
+					<button class="btn btn-default" type="submit"
+						ng-click="filtroEmpresa()">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1">
+		
+		<button class="btn btn-small" ng-click="cargamov(1);mostrarTodo()">Ver Todo
+						</button>
+		</div>
+
+	<br>
+	<div class="row">
+ 		<div class="col-md-6" ng-show="sinfiltro">
+			<ul class="pagination .pagination-sm" style="margin:0;">
+				<li ng-repeat="abc in paginas" id="{{'pagA'+abc}}"
+					ng-click="cargarPagina(abc)"><a>{{abc}}</a></li>
+
+			</ul>
+			
+		</div><br>
+		<div class="col-md-6" ng-show="fCliente">
+			<ul class="pagination .pagination-sm" style="margin:0;">
+				<li ng-repeat="abc1 in paginasc" id="{{'pagCA'+abc1}}"
+					ng-click="cargarPaginac(abc1)"><a>{{abc1}}</a></li>
+
+			</ul>
+			
+		</div>
+		<div class="col-md-6" ng-show="fEmpresa">
+			<ul class="pagination .pagination-sm" style="margin:0;">
+				<li ng-repeat="abc2 in paginase" id="{{'pagEA'+ abc2}}"
+					ng-click="cargarPaginae(abc2)"><a>{{abc2}}</a></li>
+
+			</ul>
+			
+		</div>
+		<div class="col-md-6">
+			<button class="btn btn-primary" ng-click="modalFechas()">Descargar Excel</button>
+		</div>
+		</div>
+		
+		</div>
+		</div>
+	<table class="table table-stripped">
+		<thead>
+			<tr>
+				<th>No. OT</th>
+<!-- 				<th>Cliente</th> -->
+				<th>Fecha</th>
+				<th>Cliente</th>
+				<th>Empresa</th>
+				<th>Banco</th>
+				<th>Cuenta</th>
+				<th>Tipo</th>
+				<th>Monto</th>
+				<th>Estatus</th>
+				<th>Descripcion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="m in mov">
+				<td>{{m.idOrden}}</td>
+				<td>{{m.fechaCreacion}}</td>
+				<td>{{m.idCliente}}</td>
+				<td>{{m.empresa}}</td>
+				<td>{{m.banco}}</td>
+				<td>{{m.cuenta}}</td>
+				<td>{{m.tipo}}</td>
+				<td>{{m.monto | currency}}</td>
+				<td>{{m.estatus}}</td>
+				<td>{{m.descripcion}}</td>
+			</tr>
+		</tbody>
+
+	</table>
+	<div class="container">
+<div class="row">
+	<div class="col-md-6" ng-show="sinfiltro">
+	 		<ul class="pagination .pagination-sm">
+				<li ng-repeat="abc in paginas" id="{{'pagB'+abc}}"
+					ng-click="cargarPagina(abc)"><a>{{abc}}</a></li>
+			</ul>
+	</div>	
+		<div class="col-md-6" ng-show="fCliente">
+	 		<ul class="pagination .pagination-sm">
+				<li ng-repeat="abc1 in paginasc" id="{{'pagCB'+abc1}}"
+					ng-click="cargarPaginac(abc1)"><a>{{abc1}}</a></li>
+			</ul>
+		</div>
+	<div class="col-md-6" ng-show="fEmpresa">
+	 		<ul class="pagination .pagination-sm">
+				<li ng-repeat="abc2 in paginase" id="{{'pagEB'+abc2}}"
+					ng-click="cargarPaginae(abc2)"><a>{{abc2}}</a></li>
+			</ul>
+	</div>
+	
+</div>
+</div>
+ <!-- Modal Ver BROCKER	-->
+  <div class="modal fade" id="myModalVista" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalVista" aria-hidden="true">
+                           
+      <div class="modal-dialog" id="mdialTamanio">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             <p class="modal-title" id="myModalLabel">Detalles del Brocker </p>
+            
+          </div>
+          <div class="modal-body">
+           <h4>Datos Generales</h4>
+           <div>
+<!--            ID:<br><label>{{bk.id}}</label><br> -->
+           Nombre:<br><label>{{bk.nickname}}</label><br>
+<!--            Tipo: <br><label>{{bk.tipo}}</label><br> -->
+           Responsable:<br><label>{{bk.responsable}}</label><br>
+           Disponible:<br><label>{{bk.enabled}}</label><br>
+                    
+           </div>
+           <br>
+           <div ng-show="ca">
+           <h4>Clientes Asociados</h4>
+           
+           <div class="list-type3">
+           <ul ng-repeat="cliente in listaCliente"><li><b>{{cliente.nickname}}</b></li></ul>
+           </div>
+<!--            <table class="table table-stripped" style="width: 20%;"> -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th style="width: 20%;">Nombre</th> -->
+						
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody> -->
+			
+<!-- 					<tr ng-repeat="cliente in listaCliente"> -->
+<!-- 						<td>{{cliente.nickname}}</td> -->
+						
+<!-- 					</tr> -->
+<!-- 			</tbody> -->
+
+<!-- 	</table> -->
+	<br>
+	</div>
+<!-- 	<div ng-show="ca"> -->
+<!--            <h4>Cuentas Asosiadas</h4> -->
+<!--            <table class="table table-stripped"> -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th style="width: 20%;">Titular</th> -->
+<!-- 						<th style="width: 25%;">Banco</th> -->
+<!-- 						<th style="width: 15%;">Cuenta</th> -->
+<!-- 						<th style="width: 20%;">Clabe</th> -->
+<!-- 						<th style="width: 20%;">Acciones</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody> -->
+			
+<!-- 					<tr ng-repeat="bcuenta in ccuenta"> -->
+<!-- 						<td>{{bcuenta.nombre}}</td> -->
+<!-- 						<td>{{bcuenta.banco}}</td> -->
+<!-- 						<td>{{bcuenta.cuenta}}</td> -->
+<!-- 						<td>{{bcuenta.clabe}}</td> -->
+<!-- 						<td> -->
+						
+<!-- 									<button title="Eliminar Cuenta" class="btn btn-small" ng-click="eliminarcc(bcuenta)"> -->
+<!-- 										<i class="glyphicon glyphicon-remove"></i> -->
+<!-- 									</button> -->
+<!-- 									</td> -->
+<!-- 					</tr> -->
+<!-- 			</tbody> -->
+
+<!-- 	</table> -->
+<!-- 	</div> -->
+	<br>
+<!-- 	<div ng-show="rc"> -->
+<!-- <!-- 	Formulario oculto cuando se precione el boton de Nueva cuenta abrirlo -->
+<!-- 	<form id="forma" name="myForm"> -->
+<!-- 	<h4>Registro de Cuenta</h4><br> -->
+<!-- 		<div class="col-md-6"> -->
+<!-- 			Banco:  -->
+<!-- <!-- 			<input class="form-control" --> 
+<!-- <!-- 				ng-model="cuenta.banco" type="text" ng-required="true"><br> --> 
+				
+<!-- 				<select name="bankList" ng-model="cuenta.banco" class="form-control" id="bankList" ng-required="true"> -->
+<!-- 			<option value=""></option> -->
+<!-- <option value="Banco Nacional de M&eacutexico (Banamex)">Banco Nacional de M&eacutexico (Banamex)</option> -->
+<!-- <option value="Banco Santander (M&eacutexico)">Banco Santander (M&eacutexico)</option> -->
+<!-- <option value="HSBC Mexico.">HSBC M&eacutexico.</option> -->
+<!-- <option value="Scotiabank Inverlat.">Scotiabank Inverlat.</option> -->
+<!-- <option value="BBVA Bancomer.">BBVA Bancomer.</option> -->
+<!-- <option value="Banco Mercantil del Norte (Banorte).">Banco Mercantil del Norte (Banorte).</option> -->
+<!-- <option value="Banco Interacciones.">Banco Interacciones.</option> -->
+<!-- <option value="Banco Inbursa.">Banco Inbursa.</option> -->
+<!-- <option value="banca Mifel.">banca Mifel.</option> -->
+<!-- <option value="Banco Regional de Monterrey.">Banco Regional de Monterrey.</option> -->
+<!-- <option value="Banco Invex.">Banco Invex.</option> -->
+<!-- <option value="Banco del Bajio.">Banco del Bajio.</option> -->
+<!-- <option value="Bansi.">Bansi.</option> -->
+<!-- <option value="Banca Afirme.">Banca Afirme.</option> -->
+<!-- <option value="Bank of America Mexico.">Bank of America M&eacutexico.</option> -->
+<!-- <option value="Banco J.P. Morgan.">Banco J.P. Morgan.</option> -->
+<!-- <option value="Banco Ve Por Mas.">Banco Ve Por Mas.</option> -->
+<!-- <option value="American Express Bank (Mexico).">American Express Bank (M&eacutexico).</option> -->
+<!-- <option value="Investa Bank.">Investa Bank.</option> -->
+<!-- <option value="CiBanco.">CiBanco.</option> -->
+<!-- <option value="Bank of Tokyo-Mitsubishi UFJ (Mexico).">Bank of Tokyo-Mitsubishi UFJ (M&eacutexico).</option> -->
+<!-- <option value="Banco Monex.">Banco Monex.</option> -->
+<!-- <option value="Deutsche Bank Mexico.">Deutsche Bank M&eacutexico.</option> -->
+<!-- <option value="Banco Azteca.">Banco Azteca.</option> -->
+<!-- <option value="Banco Credit Suisse (Mexico).">Banco Credit Suisse (M&eacutexico).</option> -->
+<!-- <option value="Banco Autofin Mexico.">Banco Autofin M&eacutexico.</option> -->
+<!-- <option value="Barclays Bank Mexico.">Barclays Bank M&eacutexico.</option> -->
+<!-- <option value="Banco Ahorro Famsa.">Banco Ahorro Famsa.</option> -->
+<!-- <option value="Intercam Banco.">Intercam Banco.</option> -->
+<!-- <option value="ABC Capital. ">ABC Capital. </option> -->
+<!-- <option value="Banco Actinver.">Banco Actinver.</option> -->
+<!-- <option value="Banco Compartamos.">Banco Compartamos.</option> -->
+<!-- <option value="Banco Multiva.">Banco Multiva.</option> -->
+<!-- <option value="UBS Bank Mexico.">UBS Bank M&eacutexico.</option> -->
+<!-- <option value="Bancoppel.">Bancoppel.</option> -->
+<!-- <option value="ConsuBanco.">ConsuBanco.</option> -->
+<!-- <option value="Banco Wal-Mart de Mexico.">Banco Wal-Mart de M&eacutexico.</option> -->
+<!-- <option value="Volkswagen Bank.">Volkswagen Bank.</option> -->
+<!-- <option value="Banco Base.">Banco Base.</option> -->
+<!-- <option value="Banco Pagatodo.">Banco Pagatodo.</option> -->
+<!-- <option value="Banco Forjadores.">Banco Forjadores.</option> -->
+<!-- <option value="Bankaool.">Bankaool.</option> -->
+<!-- <option value="Banco Inmobiliario Mexicano.">Banco Inmobiliario Mexicano.</option> -->
+<!-- <option value="Fundacion Donde Banco.">Fundaci&oacuten Dond&eacute Banco.</option> -->
+<!-- <option value="Banco Bancrea.">Banco Bancrea.</option> -->
+<!-- </select><br> -->
+				
+<!-- 		</div> -->
+<!-- 		<div class="col-md-6"> -->
+<!-- 			Cuenta: <input class="form-control" -->
+<!-- 				ng-model="cuenta.cuenta" type="text" ng-required="true"><br> -->
+<!-- 		</div> -->
+		
+<!-- 		<div class="col-md-6"> -->
+<!-- 			Clabe: <input class="form-control" -->
+<!-- 				ng-model="cuenta.clabe" type="text" ng-required="true"><br> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-6"> -->
+<!-- 			Titular: <input class="form-control" -->
+<!-- 				ng-model="cuenta.nombre" type="text" ng-required="true"><br> -->
+<!-- 		</div> -->
+		
+<!-- 		<!--    	   ^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$ -->
+		
+
+		
+<!-- 			<button value="Guardar" class="btn" ng-controller="brockercuentacontroller" onClick="this.disabled=true" -->
+<!-- 				ng-click="myForm.$valid && guardabrockerCuenta(bk.id)">Guardar</button> -->
+<!-- 			<button ng-click="btnCancelar()" class="btn">Cancelar</button> -->
+	
+<!-- 	</form> -->
+	
+<!-- 	</div> -->
+          </div>
+          <div class="modal-footer">
+<!--           <button type="button" class="btn btn-default" ng-controller="brockercuentacontroller" ng-show="btn" ng-click="hide()">Nueva Cuenta</button> -->
+<!--           <button type="button" class="btn btn-default" ng-show="btn">Asosiar Cliente</button> -->
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reload()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--     MODAL PARA CONFIRMAICON DE ELIMINACION DEL BROCKER -->
+   <div id="mdsino" class="modal fade">
+    
+    <div class="modal-dialog mdlconfirmacion">
+        <div class="modal-content modal-content-sm">
+            
+            <div class="modal-body">
+                <p id="pmdl">Desea Continuar con la Eliminacion?</p>
+                
+            </div>
+            <div class="modal-footer">
+                <button id="btnsi" 
+
+                type="button" class="btn btn-primary">Aceptar</button>
+                <button id="btnno" 
+
+                type="button" class="btn btn-default">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modalgif"></div>
+<!--     MODAL PARA EDICION DEL BROCKER -->
+<div class="modal fade" id="fechas" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="MDEditar" aria-hidden="true">
+  
+    <div class="modal-dialog" id="mdialTamanio">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Seleccionar Fechas</h4>
+      </div>
+      <div class="modal-body">
+	 
+	<form id="forma" name="myForm">
+		<div class="row">
+		<div class="col-md-6">
+			Fecha Inicio: <input class="form-control" type="date"
+				ng-model="fechaInicio" ng-required="true" ><br>
+		</div>
+		<div class="col-md-6">
+			Fecha Fin: <input class="form-control" type="date"
+				ng-model="fechaFin" ng-required="true" ><br>
+		</div>
+		<div class="col-md-12">
+			<a value="Guardar" class="btn"
+				href="movimientos/getReporte/{{fi}}/{{ff}}" download="Movimientos.xls">Descargar</a>
+			
+		</div>
+		</div>
+	</form>
+</div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+</div>
+</div>
+	<div id="snackbar">Broker Editado Correctamente.</div>
+</div>

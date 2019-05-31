@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+/*--HEADER--*/
+body {font-family: 'Lato', sans-serif; font-size:18px;}
+/* Nuevo */
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+.captcha{
+	 text-align: -webkit-center;
+	 
+}
+#rerror{
+	font-size: 16px;
+	color: #ff0000;
+	
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Termina */
+.footertext{
+	color:#fff;
+}
+.logo-footer{
+	margin-top: 40px;
+}
+.footer {
+	padding-top: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    margin-top: 20px;
+    
+    position: absolute;
+  	bottom: 0;
+  	width: 100%;
+  	height: 40px;
+}
+.footer-content{
+	background-color: #222222;
+}
+.navbar {
+	margin-bottom: 0;
+}
+.jumbotron {
+	background-color:#4c60ce;
+	color:#fff;
+	padding:20px 0;
+}
+.botones{
+	 margin-top: 20px;
+	 text-align: center;
+	 
+}
+/*--FORMULARIO--*/
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 25px
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+   	background:#0c009b;
+	color:#fff;
+    border: 1px solid transparent;
+    border-radius:0px;
+}
+
+.btn2 {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius:0px;
+    
+}
+
+.facInp{
+	padding-left: 3px;
+	padding-bottom: 2px;
+    height: 23px;
+    padding-top: 2px;
+}
+
+/*--headers--*/
+
+.h3, .h4, .h5, .h6, h3, h4, h5, h6 {
+    
+    margin-left: 10px;}
+    
+/*--tablas--*/
+.table-bordered {
+    
+    margin-left: 10px;
+}
+
+td, th {
+    padding: 0;
+    border-top: 1px solid #3c763d;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ffffff;
+      table-layout: fixed;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 5px;
+    line-height: 14px;
+    vertical-align: middle;
+    border-top: 1px solid #3c763d;
+}
+
+.form-inline .form-control {width:100%; margin-bottom:10px;}
+
+.form-inline#forma, .form-control#forma {margin-bottom:10px;}
+
+/* MODAL CSS */
+
+	#mdialTamanio{
+      width: 60% !important;
+    }
+    #mdlDialog{
+      width: 22% !important;
+    }
+    #mdlconfirmacion{
+      width: 10% !important;
+    }
+    .modal-header {
+	background-color: #4c60ce;
+	color: white;
+	width: 98% !important;
+	margin: 1% auto;
+	text-align: center;
+	font-size: 18px;
+	box-shadow: 0px 6px 13px -4px rgba(167,190,235,1);
+	border-radius:10px 10px 10px 10px;
+}
+
+.pmdl {
+	text-align: center;
+	position: fixed;
+	margin-top: 2cm;
+}
+.modal-content-sm{
+	width: 50%;
+	top: 200px;
+}
+#btnsi{
+	background-color: #b30000;
+}
+#btnno{
+	background-color: #006622;
+}
+.modalgif {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     50%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('https://media.giphy.com/media/52qtwCtj9OLTi/giphy.gif') 
+                50% 50% 
+                no-repeat;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 1% auto; /* 15% from the top and centered */
+    padding: 5px;
+    border: 1px solid #888;
+/*     width: 80%; /* Could be more or less, depending on screen size */ */
+    border-radius:10px 10px 10px 10px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*--POST--*/
+.main{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.post{
+	padding-bottom:20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #999;
+}
+.post .post-title a{
+	color:#333;
+}
+.post .thumb{
+	margin-right:10px;
+	width:40%;
+}
+.separador{
+	margin-bottom: 100px;
+	padding-bottom: 100px;
+}
+.tablacfdi{
+	height: 10%;
+	padding 20px;
+	font-size: xx-small;
+	font-weight: bold;
+}
+.miga-de-pan{
+	margin-top: 0px;
+}
+.img{
+	height: 10%;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.post .thumb img{
+	width: 100%;
+}
+/*--Media Querie--*/
+@media screen and (max-width: 768px){
+	.post .thumb {
+		width:100%;
+		margin-bottom: 20px;
+		margin-right: 0;
+	}
+}
+/* /* The Modal (background) */ */
+/* .modal { */
+/*     display: none; Hidden by default */
+/*     position: fixed; Stay in place */
+/*     z-index: 1; Sit on top */
+/*     left: 0; */
+/*     top: 0; */
+/*     width: 100%; Full width */
+/*     height: 100%; Full height */
+/*     overflow: auto; Enable scroll if needed */
+/*     background-color: rgb(0,0,0); Fallback color */
+/*     background-color: rgba(0,0,0,0.4); Black w/ opacity */
+/* } */
+
+/* /* Modal Content/Box */ */
+/* .modal-header { */
+/* 	background-color: #55ACEE; */
+/* } */
+/* .modal-content { */
+/*     background-color: #fefefe; */
+/*     margin: 15% auto; 15% from the top and centered */
+/*     padding: 20px; */
+/*     border: 1px solid #888; */
+/*     width: 80%; Could be more or less, depending on screen size */
+/* } */
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Toast */
+/* The snackbar - position it at the top and in the middle of the screen */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 260px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #33cc33; /* Background color */
+    color: #fff; /* Text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 18px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 90%; /* Center the snackbar */
+    top: 80px;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;} 
+    to {top: 80px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 80px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {top: 80px; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {top: 80px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+
+infPago infComisiones infCliente{
+  margin-top: 3px;
+  margin-bottom: 50px;
+ 
+}
+.Dlabel{
+  font-size:16px;
+  background-color: #e6e6e6;
+  padding: 4px;
+	
+}
+.box{
+	overflow: scroll;
+}

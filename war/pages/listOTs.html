@@ -1,0 +1,168 @@
+<section class="jumbotron">
+	<div class="container">
+		<h2>Ordenes de trabajo</h2>
+			<submenu perfil="perfilUsuario"/>
+	</div>
+</section>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="No. OT"
+					ng-model="buscar.noot">
+				<div class="input-group-btn">
+					<button class="btn btn-default" type="submit"
+						ng-click="filtroOT(buscar.noot)">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</div>
+				
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="input-group">
+						<input id="searchBoxLista" class="form-control form-control-sm" type="text" ng-model="busca" placeholder="Clientes..." data-provide="typehead" autocomplete="off" onkeyup="javascript:this.value=this.value.toUpperCase();">
+					<div class="input-group-btn">
+					<button class="btn btn-default" type="submit"
+						ng-click="filtroCliente()">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+		
+		<button class="btn btn-small" ng-click="verTodo()">Ver Todo
+						</button>
+		</div>
+		<div class="col-md-3">
+			<button class="btn btn-primary" ng-click="modalFechas()">Reporte</button>
+		</div>
+
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-6">
+			<ul class="pagination .pagination-sm" style="margin:0;">
+				<li ng-repeat="abc in paginas" id="{{'pagA'+abc}}"
+					ng-click="cargarPagina(abc)"><a>{{abc}}</a></li>
+
+			</ul>
+			
+		</div>
+		<br>
+		<table class="table table-stripped">
+			<thead>
+				<tr>
+					<th>No. OT</th>
+					<th>Cliente</th>
+					<th>Saldo</th>
+					<th>Status</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="ot in ots">
+					<td>{{ot.id}}</td>
+					<td>{{ot.nombreCliente}}</td>
+					<td>{{ot.saldoMov | currency}}</td>
+					<td>{{ot.estatus}}</td>
+					<td><button class="btn btn-small" ng-click="verEdit(ot.id)" title="Ver OT"ng-hide="ot.estatus!='VALIDADO'">
+							<i class="glyphicon glyphicon-eye-open"></i>
+						</button>
+						<button class="btn btn-small" ng-click="ver(ot.id)" title="Ver OT Modificable" ng-hide="ot.estatus=='VALIDADO'"> 
+							<i class="glyphicon glyphicon-eye-open"></i>
+						</button>
+						<a class="btn btn-info" data-toggle="tooltip"
+							title="Imprimir OT"
+							href=" ots/descargaOt/{{ot.id}}" download="ordenDeTrabajo.pdf">
+							<i class="glyphicon glyphicon-print"></i>
+						</a>	
+						<button class="btn btn-small" ng-click="getidot(ot.id)" title="Enviar Notificaci&oacute;n"
+						data-toggle="modal" data-target="#mdlNoti">
+							<i class="glyphicon glyphicon-send"></i>
+						</button>
+						<button class="btn btn-small"  data-toggle="modal" ng-if="perfil=='AdministradorRoot' || perfil=='Administrador'"
+						 ng-show="ot.estatus!='activo'"
+						 ng-hide="ot.estatus!='activo'"
+						  title="Validar"
+						 ng-click="validar(ot.id)">
+					
+							<span class="glyphicon glyphicon-ok"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+	 		<ul class="pagination .pagination-sm">
+				<li ng-repeat="abc in paginas" id="{{'pagB'+abc}}"
+					ng-click="cargarPagina(abc)"><a>{{abc}}</a></li>
+			</ul>
+			
+		</div>
+	</div>
+</div>
+<!-- Modal Confirmar validacion resguardo -->
+<div id="mdlNoti" class="modal fade" role="dialog">
+  <div class="modal-dialog" id="mdlDialog">
+
+    <div class="modal-content">
+     
+      <div class="modal-body">
+		<h3><code>Confirmacion de Notificacion.</code></h3>
+		<div style="padding-left:20px;">
+		<p >Esta apunto de enviar una notificacion</p>
+		</div>
+	 </div>
+      <div class="modal-footer">
+      <div class ="row" align="center">
+      <button type="button" class="btn btn-default" ng-click="enviarnoti()">Continuar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="fechas" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="MDEditar" aria-hidden="true">
+  
+    <div class="modal-dialog" id="mdialTamanio">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Seleccionar Fechas</h4>
+      </div>
+      <div class="modal-body">
+	 
+	<form id="forma" name="myForm">
+		<div class="row">
+		<div class="col-md-6">
+			Fecha Inicio: <input class="form-control" type="date"
+				ng-model="fechaInicio" ng-required="true" ><br>
+		</div>
+		<div class="col-md-6">
+			Fecha Fin: <input class="form-control" type="date"
+				ng-model="fechaFin" ng-required="true"
+				 ><br>
+		</div>
+		<div class="col-md-12">
+			<a value="Guardar" class="btn"
+				href="reportes/reportes/{{fi}}/{{ff}}" download="ReporteOT.xls">Descargar</a>
+			
+		</div>
+		</div>
+	</form>
+</div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+</div>
+
