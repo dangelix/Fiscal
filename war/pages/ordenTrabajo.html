@@ -171,11 +171,13 @@
 		<table style="width: 100%" class="table table-stripped">
 			<thead>
 				<tr>
-					<th>Importe <input type="radio" name="optradio"
-						ng-click="tipoOperacion('base')" ng-checked="tipoOP=='base'"></th>
+					<th>Importe 
+					<input type="radio" name="optradio" ng-click="tipoOperacion('base')" ng-checked="tipoOP=='base'">
+						</th>
 					<th>IVA</th>
-					<th>Total <input type="radio" name="optradio"
-						ng-click="tipoOperacion('total')" ng-checked="tipoOP=='total'"></th>
+					<th>Total 
+					<input type="radio" name="optradio" ng-click="tipoOperacion('total')" ng-checked="tipoOP=='total'">
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -191,7 +193,13 @@
 	<div class="infComisiones" ng-hide="tipoOT=='ca'">
 		<div class="Dlabel">
 			<label>Comisiones</label>
+			<span style="padding-left:4em">Base Comisiones: &nbsp;</span>
+				<input style="width: 20%" type="number"  ng-change="calcularMontos('Todos')" min="0" ng-model="otvo.ot.baseComisiones" step="0.01" max="{{otvo.ot.total}}" id="comisiones" value="{{otvo.ot.basecomisiones}}" ng-disabled="tipoOP=='base'">
+				<span style="padding-left:4em">Comision Base</span>
+				{{(otvo.ot.baseComisiones * otvo.ot.porciento) / 100 | currency}}
+				
 		</div>
+		<div class="" ng-hide="otvo.ot.baseComisiones <= otvo.ot.total" align="center"><code>El monto introducido en <b>Base de Comisiones</b> sobrepasa el total</code></div>
 		<table style="width: 100%" class="table table-stripped">
 			<thead>
 				<tr>
@@ -241,7 +249,13 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="col-md-6" align="right">
+					<button class="btn btn-small" ng-disabled="btn-comi">Guardar Comisiones</button>
+				</div>
 	</div>
+	
+	<div ng-show="msjCliente" align="center"><code>El valor introducido genera un saldo Negativo en Operacion Cliente, Verifique sus movimientos</code></div>
+	<div ng-show="msjAsesor" align="center"><code>El valor introducido genera un saldo Negativo en Operacion Asesor, Verifique sus movimientos</code></div>
 	<br>
 	<div class="infComisiones">
 		<div class="Dlabel">
