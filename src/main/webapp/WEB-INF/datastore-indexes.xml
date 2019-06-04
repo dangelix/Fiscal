@@ -12,5 +12,9 @@
     <property name="idCliente" direction="asc"/> 
     <property name="fechaInicio" direction="desc"/> 
    </datastore-index>
+       <datastore-index kind="OrdenDeTrabajo" ancestor="false" source="manual"> 
+     		<property name="idResponsable" direction="asc"/>
+      		<property name="fechaInicio" direction="desc"/>
+       </datastore-index>	
 
 </datastore-indexes>
