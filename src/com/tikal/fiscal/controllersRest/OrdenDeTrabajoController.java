@@ -409,14 +409,17 @@ public class OrdenDeTrabajoController {
 	
 	@RequestMapping(value = {"/imprimirCheque/{id}" }, method = RequestMethod.GET)
 	public void pdfCheque(HttpServletRequest req, HttpServletResponse res, @PathVariable Long id) throws IOException, DocumentException{
+		
+		System.out.println("-----------------------------");
 		AsignadorDeCharset.asignar(req, res);
 		HttpSession sesion= req.getSession();
+		System.out.println("id:"+id);
 		Usuario user=(Usuario) sesion.getAttribute("user");
 		//if(user.getPerfil().compareTo("Ejecutivo")==0 || user.getPerfil().compareTo("AdministradorRoot")==0){
 			res.setContentType("Application/PDF");
 			List<Movimiento> cheques = new ArrayList<Movimiento>();
 			cheques.add(movimientodao.get(id));
-			
+			System.out.println("cheques:::::::::"+cheques);
 			PDFcheques pdf= new PDFcheques();
 			PdfWriter.getInstance(pdf.getDocument(), res.getOutputStream());
 			pdf.getDocument().open();

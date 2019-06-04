@@ -35,20 +35,25 @@ public class PDFcheques {
 	}
 	
 	public Document construirPdf(List<Movimiento> cheques) throws DocumentException{
+		System.out.println("1111111111.");
 			construirBoceto(cheques);
 			return document;
 	}
 	
 	private void construirBoceto(List<Movimiento> cheques) throws DocumentException{	
+		System.out.println("...............");
 		for(int i=0; i<cheques.size() ;i++){
+			System.out.println("chequesBanco"+cheques.get(i).getBanco());
 			switch (cheques.get(i).getBanco()) {
-		        case "Banco Nacional de M\u00E9xico (Banamex)":
+		        case "Banco Nacional de México (Banamex)":
 		        	document.add(chequeBanamex(cheques.get(i)));
 		        break;
-		        case "HSBC":
+		        case "HSBC México":
+		        	System.out.println("llega aui.................");
 		        	document.add(chequeHSBC(cheques.get(i)));
+		        	
 		        break;
-		        case "Banco Santander (M\u00E9xico)":
+		        case "Banco Santander (México)":
 		        	document.add(chequeSantander(cheques.get(i)));
 		        break;
 		        case "Scotiabank Inverlat":
@@ -145,6 +150,7 @@ public class PDFcheques {
 	}
 	
 	private PdfPTable chequeHSBC(Movimiento mov) throws DocumentException{
+		System.out.println("entra aqui...:"+mov);
 		PdfPTable tabla = new PdfPTable(4);
 		tabla.setWidthPercentage(75);
 		tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
