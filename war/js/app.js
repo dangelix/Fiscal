@@ -32,6 +32,10 @@ app.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : "pages/listClientes.html",
 		controller : "clientController"
 	});
+	$routeProvider.when('/_alta', {
+		templateUrl : "pages/alta.html",
+		controller : "alta"
+	});
 	$routeProvider.when('/cuentas', {
 		templateUrl : "pages/listCuentas.html",
 		controller : "cuentaController"

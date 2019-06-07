@@ -1,0 +1,24 @@
+<section class="jumbotron">
+	<div class="container">
+	 <h2>Alta</h2>
+		<submenu perfil="perfilUsuario"/>
+	</div>
+</section>
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+<select class="form-control" ng-model="select" id="selected">
+	<option value="cliente">Brokers/Clientes</option>
+	<option value="empresa">Empresas</option>
+	<option value="cuenta">Cuentas</option>
+
+</select>
+</div><br><br><br>
+<div class="col-md-8">
+<textarea name="textarea" ng-model="send" rows="10" cols="100" style="resize: none;"></textarea>
+</div>
+<div class="col-md-8">
+<button class="btn btn-success" ng-disabled="!send" ng-click="guardar(select)">Guardar</button>
+</div>
+</div>
+</div>
