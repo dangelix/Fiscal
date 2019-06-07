@@ -9,14 +9,12 @@ public class Cliente {
 	@Id private Long id;
 	
 	@Index private String nickname;
-	@Index
-	private String tipo;
+	@Index private String tipo;
 	@Index private Long responsable;
 	@Index private Long idBrocker; 
 	@Index private boolean enabled;
 	private double saldo;
-	private double saldoUSD;
-	
+	private double saldoUSD;	
 	private String nombre;
 	private String apeMaterno;
 	private String apePaterno;
@@ -35,7 +33,7 @@ public class Cliente {
 	}
 	public String getNickname() {
 		return nickname;
-	}
+	} 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,7 +47,21 @@ public class UsuarioController {
 			}
 		}
 	}
+	
+	@RequestMapping(value = { "/upPass/{idUser}/{newPass}" }, method = RequestMethod.GET)
+	public void up(HttpServletRequest request, HttpServletResponse response,@PathVariable Long idUser, @PathVariable String newPass)
+			throws IOException {
+		AsignadorDeCharset.asignar(request, response);
+		
+			AsignadorDeCharset.asignar(request, response);
+			Usuario usuario =usuarioImp.consultarId(idUser);
+			usuario.setPass(UsuarioController.otroMetodo(newPass));
+			usuarioImp.actualizarUsuario(usuario, true);
+			// System.out.println(usuario.getUsername()+"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy");
+					
+	}
 
+	
 	@RequestMapping(value = { "/consultarTodos" }, method = RequestMethod.GET, produces = "application/json")
 	public void consultarUsuarios(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		AsignadorDeCharset.asignar(request, response);
