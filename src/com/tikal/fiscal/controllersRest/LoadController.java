@@ -1,8 +1,6 @@
 package com.tikal.fiscal.controllersRest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,11 +65,12 @@ public class LoadController {
 	
 	
 	
-	@RequestMapping(value = { "/clientes" }, method = RequestMethod.GET, consumes="application/json")
+	@RequestMapping(value = { "/clientes" }, method = RequestMethod.POST, consumes="application/json")
 	private void update(HttpServletRequest req, HttpServletResponse res, @RequestBody String json) throws IOException{
 		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
-		System.out.println("----------");
+
 		AsignadorDeCharset.asignar(req, res);
+		System.out.println("----------");
 		String[] conceptos = json.split("\n");
 	//	List<Cliente> lista= new ArrayList<Cliente>();
 	//	int indice=facturarenglondao.indice()+1;
@@ -122,8 +121,8 @@ public class LoadController {
 	}
 		
 		
-	@RequestMapping(value = { "/empresas" }, method = RequestMethod.GET, consumes="application/json")
-	private void em(HttpServletRequest req, HttpServletResponse res, @RequestBody String json) throws IOException{
+	@RequestMapping(value = { "/empresas" }, method = RequestMethod.POST, consumes="application/json")
+	private void em(HttpServletRequest req, HttpServletResponse res, @RequestBody String json) throws IOException {
 		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
 		System.out.println("----------");
 		AsignadorDeCharset.asignar(req, res);
@@ -140,10 +139,10 @@ public class LoadController {
 			empresaDao.addEmpresa(e);
 	
 		}
-	}
+	} 
 	
 	
-	@RequestMapping(value = { "/cuentas" }, method = RequestMethod.GET, consumes="application/json")
+	@RequestMapping(value = { "/cuentas" }, method = RequestMethod.POST, consumes="application/json")
 	private void ctas(HttpServletRequest req, HttpServletResponse res, @RequestBody String json) throws IOException{
 		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
 		System.out.println("----------");
