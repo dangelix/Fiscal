@@ -72,17 +72,25 @@ public class LoadController {
 		AsignadorDeCharset.asignar(req, res);
 		System.out.println("----------");
 		String[] conceptos = json.split("\n");
-	//	List<Cliente> lista= new ArrayList<Cliente>();
-	//	int indice=facturarenglondao.indice()+1;
+	
 		for(int i=1; i<conceptos.length; i++){
 			String m = conceptos[i];
-			m=m.replaceAll("\r", "");
-			String[] values = m.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-			Cliente c= new Cliente();
-			
+			m= m.replace("\"\t", "");
+			String[] values= m.split("\t");
+			System.out.println("----------values0 :"+values[0]);
+			System.out.println("----------values1 :"+values[1]);
+			System.out.println("----------values2 :"+values[2]);
+			System.out.println("----------values3 :"+values[3]);
+			System.out.println("----------values4 :"+values[4]);
+			System.out.println("----------values5 :"+values[5]);
+			System.out.println("----------values6 :"+values[6]);
+			System.out.println("----------values7 :"+values[7]);
+			System.out.println("----------values8 :"+values[8]);
+			System.out.println("----------values9 :"+values[9]);
+			Cliente c= new Cliente();			
 			c.setNickname(values[0]);
 			c.setTipo(values[1]);
-			c.setResponsable(Long.valueOf(values[2]));
+			c.setResponsable(Long.valueOf(values[2].replaceAll(" ","")));
 			c.setIdBrocker(Long.valueOf(values[3]));
 			c.setEnabled(true);
 			c.setSaldo(Double.parseDouble(values[5]));
