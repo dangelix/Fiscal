@@ -1,6 +1,7 @@
 package com.tikal.fiscal.controllersRest;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -90,7 +91,7 @@ public class LoadController {
 			Cliente c= new Cliente();			
 			c.setNickname(values[0]);
 			c.setTipo(values[1]);
-			c.setResponsable(Long.valueOf(values[2].replaceAll(" ","")));
+			c.setResponsable(Long.valueOf(values[2]));
 			c.setIdBrocker(Long.valueOf(values[3]));
 			c.setEnabled(true);
 			c.setSaldo(Double.parseDouble(values[5]));
@@ -174,6 +175,21 @@ public class LoadController {
 			cuentadao.save(c);;
 	
 		}
+	}
+	
+	
+	
+	
+	@RequestMapping(value = { "/byeC" }, method = RequestMethod.GET)
+	private void del(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
+		System.out.println("---ini-------");
+		List<Cliente> clientes= clientedao.getAll_();
+		for (Cliente c:clientes){
+			clientedao.delete(c);
+		}
+		
+		System.out.println("---fin-------");
 	}
 
 }

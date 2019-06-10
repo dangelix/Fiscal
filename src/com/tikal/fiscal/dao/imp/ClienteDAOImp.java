@@ -53,6 +53,11 @@ public class ClienteDAOImp implements ClienteDAO{
 	}
 
 	@Override
+	public void delete(Cliente c) { 
+		ofy().delete().entity(c).now();
+	}
+	
+	@Override
 	public List<Cliente> getByBrocker(Long idbrocker) {
 		List<Cliente> lista= ofy().load().type(Cliente.class).filter("enabled",true).filter("tipo","cliente").filter("idBrocker",idbrocker).list();
 		return lista;
@@ -67,6 +72,12 @@ public class ClienteDAOImp implements ClienteDAO{
 	@Override
 	public List<Cliente> getAll() {
 		List<Cliente> lista= ofy().load().type(Cliente.class).filter("enabled",true).list();
+		return lista;
+	}
+	
+	@Override
+	public List<Cliente> getAll_() {
+		List<Cliente> lista= ofy().load().type(Cliente.class).list();
 		return lista;
 	}
 
