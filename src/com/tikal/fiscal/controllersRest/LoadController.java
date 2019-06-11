@@ -161,10 +161,11 @@ public class LoadController {
 	//	int indice=facturarenglondao.indice()+1;
 		for(int i=1; i<conceptos.length; i++){
 			String m = conceptos[i];
-			m=m.replaceAll("\r", "");
-			String[] values = m.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-			Cuenta c= new Cuenta();
-			
+			m= m.replace("\"\t", "");
+			String[] values= m.split("\t");
+//			m=m.replaceAll("\r", "");
+//			String[] values = m.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+			Cuenta c= new Cuenta();			
 			c.setBanco(values[0]);
 			c.setCuenta(values[1]);
 			c.setClabe(values[2]);
@@ -192,21 +193,39 @@ public class LoadController {
 		System.out.println("---fin-------");
 	}
 	
-	@RequestMapping(value = { "/brocker" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/idEmpresa" }, method = RequestMethod.GET)
 	private void n(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
 		System.out.println("---ini-------");
-		List<Cliente> clientes= clientedao.getAll_();
-		for (Cliente c:clientes){
-			if (c.getTipo().equals("brocker")){
-				System.out.println("-entra");
-				c.setNombre(c.getNickname());
-				clientedao.save(c);
-			}
+		List<Cuenta> cuentas= cuentadao.getAll();
+		for (Cuenta c:cuentas){
+			Empresa empresa= empresaDao.buscar(c.getNombre()).get(0);
+			c.setIdEmpresa(empresa.getId());
+			cuentadao.save(c);
+//			if (c.getNombre().equals("brocker")){
+//				c.setNombre(c.getNickname());
+//				clientedao.save(c);
+//			}
 			
 		}
 		
 		System.out.println("---fin-------");
 	}
+	
+//	@RequestMapping(value = { "/brocker" }, method = RequestMethod.GET)
+//	private void n(HttpServletRequest req, HttpServletResponse res) throws IOException{
+//		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
+//		System.out.println("---ini-------");
+//		List<Cliente> clientes= clientedao.getAll_();
+//		for (Cliente c:clientes){
+//			if (c.getTipo().equals("brocker")){
+//				c.setNombre(c.getNickname());
+//				clientedao.save(c);
+//			}
+//			
+//		}
+//		
+//		System.out.println("---fin-------");
+//	}
 
 }

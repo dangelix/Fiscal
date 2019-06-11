@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tikal.fiscal.dao.CuentaDAO;
+import com.tikal.fiscal.model.Cliente;
 import com.tikal.fiscal.model.Cuenta;
 
 public class CuentaDAOImp implements CuentaDAO {
@@ -65,6 +66,12 @@ public class CuentaDAOImp implements CuentaDAO {
 	@Override
 	public List<Cuenta> getByEmpresa(Long idEmpresa) {
 		return ofy().load().type(Cuenta.class).filter("enabled",true).filter("idEmpresa", idEmpresa).list();
+	}
+
+	@Override
+	public List<Cuenta> getAll() {
+		List<Cuenta> lista= ofy().load().type(Cuenta.class).list();
+		return lista;
 	}
 
 }
