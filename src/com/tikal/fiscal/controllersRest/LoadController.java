@@ -191,5 +191,22 @@ public class LoadController {
 		
 		System.out.println("---fin-------");
 	}
+	
+	@RequestMapping(value = { "/brocker" }, method = RequestMethod.GET)
+	private void n(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
+		System.out.println("---ini-------");
+		List<Cliente> clientes= clientedao.getAll_();
+		for (Cliente c:clientes){
+			if (c.getTipo().equals("brocker")){
+				System.out.println("-entra");
+				c.setNombre(c.getNickname());
+				clientedao.save(c);
+			}
+			
+		}
+		
+		System.out.println("---fin-------");
+	}
 
 }
