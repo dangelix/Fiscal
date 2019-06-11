@@ -175,8 +175,8 @@ public class LoadController {
 			//System.out.println("----------values7 :"+values[7]);
 			Cuenta c= new Cuenta();			
 			c.setBanco(values[0]);
-			c.setCuenta(values[1]);
-			c.setClabe(values[2]);
+			c.setCuenta(values[2]);
+			c.setClabe(values[1]);
 			c.setNombre(values[6]);
 			c.setEnabled(true);
 			c.setIdEmpresa(Long.valueOf(values[4]));
