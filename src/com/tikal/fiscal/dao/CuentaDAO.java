@@ -10,6 +10,7 @@ public interface CuentaDAO {
 	public Cuenta get(Long id);
 	
 	public void eliminar(Cuenta c);
+	public void delete(Cuenta c);
 	
 	public List<Cuenta> getPage(int page);
 	

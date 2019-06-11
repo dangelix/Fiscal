@@ -165,11 +165,19 @@ public class LoadController {
 			String[] values= m.split("\t");
 //			m=m.replaceAll("\r", "");
 //			String[] values = m.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+			System.out.println("----------values0 :"+values[0]);
+			System.out.println("----------values1 :"+values[1]);
+			System.out.println("----------values2 :"+values[2]);
+			System.out.println("----------values3 :"+values[3]);
+			System.out.println("----------values4 :"+values[4]);
+			System.out.println("----------values5 :"+values[5]);
+			System.out.println("----------values6 :"+values[6]);
+			//System.out.println("----------values7 :"+values[7]);
 			Cuenta c= new Cuenta();			
 			c.setBanco(values[0]);
 			c.setCuenta(values[1]);
 			c.setClabe(values[2]);
-			c.setNombre(values[3]);
+			c.setNombre(values[6]);
 			c.setEnabled(true);
 			c.setIdEmpresa(Long.valueOf(values[4]));
 			c.setMoneda(values[5]);
@@ -193,19 +201,41 @@ public class LoadController {
 		System.out.println("---fin-------");
 	}
 	
+	@RequestMapping(value = { "/byeCtas" }, method = RequestMethod.GET)
+	private void delC(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
+		System.out.println("---ini-------");
+		List<Cuenta> clientes= cuentadao.getAll();
+		for (Cuenta c:clientes){
+			cuentadao.delete(c);
+		}
+		
+		System.out.println("---fin-------");
+	}
+	
 	@RequestMapping(value = { "/idEmpresa" }, method = RequestMethod.GET)
 	private void n(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
-		System.out.println("---ini-------");
+		System.out.println("---ini----:");
 		List<Cuenta> cuentas= cuentadao.getAll();
 		for (Cuenta c:cuentas){
-			Empresa empresa= empresaDao.buscar(c.getNombre()).get(0);
-			c.setIdEmpresa(empresa.getId());
+			System.out.println("---ini-----empresa:"+c.getNombre());
+			List<Empresa> empresas= empresaDao.buscar(c.getNombre());
+			if (empresas.size()==0){
+				System.out.println("--entra-");
+				Empresa e=new Empresa();
+				e.setNombre(c.getNombre());
+				empresaDao.addEmpresa(e);
+				c.setIdEmpresa(e.getId());
+				cuentadao.save(c);
+			}else{
+			c.setIdEmpresa(empresas.get(0).getId());
 			cuentadao.save(c);
 //			if (c.getNombre().equals("brocker")){
 //				c.setNombre(c.getNickname());
 //				clientedao.save(c);
 //			}
+			}
 			
 		}
 		

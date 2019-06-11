@@ -41,6 +41,11 @@ public class CuentaDAOImp implements CuentaDAO {
 		c.setEnabled(false);
 		this.save(c);
 	}
+	
+	@Override
+	public void delete(Cuenta c) {
+		ofy().delete().entity(c).now();
+	}
 
 	@Override
 	public List<Cuenta> getByBanco(String banco) {
