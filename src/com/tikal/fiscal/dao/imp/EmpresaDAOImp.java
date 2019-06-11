@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.tikal.fiscal.dao.EmpresaDAO;
-import com.tikal.fiscal.model.Cliente;
+
 import com.tikal.fiscal.model.Empresa;
 
 public class EmpresaDAOImp implements EmpresaDAO{
