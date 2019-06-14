@@ -301,7 +301,7 @@
 						ng-click="detalleCheque($index, 'OPC')"><b>Detalle</b></a></td>
 					<td class="ng-binding" align="right"><a class="btn btn-info"
 						data-toggle="tooltip" title="Descarga cheque"
-						ng-show="mov.tipo == 'Cheque' && mov.estatus!='CANCELADO'&& mov.banco!=null && mov.cuenta != null &&(perfil=='Ejecutivo' || perfil=='AdministradorRoot')"
+						ng-show="mov.tipo == 'Cheque' && mov.estatus!='CANCELADO'&& mov.banco!=null && mov.cuenta != null &&(perfil=='Ejecutivo' || perfil=='AdministradorRoot' || perfil=='Administrador')"
 						href="ots/imprimirCheque/{{mov.id}}" download="chequePDF.pdf">
 							<i class="glyphicon glyphicon-download-alt"></i>
 					</a></td>
@@ -324,21 +324,40 @@
 						</button>
 					</td>
 					<td class="ng-binding" align="right">
-						<button class="btn btn-small" data-toggle="modal"
-							ng-if="(perfil=='AdministradorRoot' || perfil=='Ejecutivo' || perfil=='Administrador')"
-							ng-show="(mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo' &&  mov.estatus == 'AUTORIZADO') || (mov.tipo == 'Efectivo' && perfil=='Administrador' && mov.estatus == 'AUTORIZADO')"
-							ng-hide="(mov.tipo == 'Resguardo' && mov.estatus == 'AUTORIZADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'VALIDADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'ACTIVO'"
-							ng-disabled="mov.tipo != 'Efectivo' && mov.banco==null && mov.cuenta == null && mov.estatus == 'VALIDADO'"
+<!-- 						<button class="btn btn-small" data-toggle="modal" -->
+<!-- 							ng-if="(perfil=='AdministradorRoot' || perfil=='Ejecutivo' || perfil=='Administrador')" -->
+<!-- 							ng-show="(mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo' &&  mov.estatus == 'AUTORIZADO') || (mov.tipo == 'Efectivo' && perfil=='Administrador' && mov.estatus == 'AUTORIZADO')" -->
+<!-- 							ng-hide="(mov.tipo == 'Resguardo' && mov.estatus == 'AUTORIZADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'VALIDADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'ACTIVO'" -->
+<!-- 							ng-disabled="mov.tipo != 'Efectivo' && mov.banco==null && mov.cuenta == null && mov.estatus == 'VALIDADO'" -->
+<!-- 							ng-click="cargarMov($index,'OPC')" data-target="#modalVerificar"> -->
+<!-- 							<span class="glyphicon glyphicon-ok"></span> -->
+<!-- 						</button> -->
+
+<!-- 						<div ng-if="mov.tipo == 'Resguardo' && mov.estatus != 'CANCELADO'"> -->
+<!-- 							<button class="btn btn-small" data-toggle="modal" -->
+<!-- 								ng-if="perfil=='AdministradorRoot' || perfil=='Administrador'" -->
+<!-- 								ng-show="(mov.tipo == 'Resguardo' )" -->
+<!-- 								ng-hide="mov.tipo == 'Resguardo' && mov.estatus == 'VALIDADO'" -->
+<!-- 								ng-disabled="mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo'" -->
+<!-- 								title="Validar Resguardo" ng-click="cargarMov($index,'OPC')" -->
+<!-- 								data-target="#modalresguardo"> -->
+
+<!-- 								<span class="glyphicon glyphicon-ok"></span> -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+							<button name="btnValidar" class="btn btn-small" data-toggle="modal"
+							ng-if="perfil=='AdministradorRoot' || perfil=='Ejecutivo' || perfil=='Administrador' "
+							ng-show="mov.tipo != 'Resguardo' && mov.estatus == 'AUTORIZADO'"
+							ng-hide="mov.tipo == 'Resguardo' || mov.estatus == 'VALIDADO' || mov.estatus == 'CANCELADO' || mov.estatus == 'ACTIVO'"
+							ng-disabled="mov.tipo != 'Efectivo' && mov.banco==null && mov.cuenta == null"
 							ng-click="cargarMov($index,'OPC')" data-target="#modalVerificar">
 							<span class="glyphicon glyphicon-ok"></span>
 						</button>
-
-						<div ng-if="mov.tipo == 'Resguardo' && mov.estatus != 'CANCELADO'">
+						<div name="btnValidarResguardo" ng-if="mov.tipo == 'Resguardo' && mov.estatus != 'CANCELADO'">
 							<button class="btn btn-small" data-toggle="modal"
-								ng-if="perfil=='AdministradorRoot' || perfil=='Administrador'"
-								ng-show="(mov.tipo == 'Resguardo' )"
-								ng-hide="mov.tipo == 'Resguardo' && mov.estatus == 'VALIDADO'"
-								ng-disabled="mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo'"
+								ng-if="perfil=='AdministradorRoot' || perfil=='Administrador' || perfil=='Ejecutivo'"
+								ng-show="(mov.tipo == 'Resguardo')"
+								ng-hide="mov.tipo != 'Resguardo' || mov.estatus == 'VALIDADO' || mov.estatus == 'CANCELADO'"
 								title="Validar Resguardo" ng-click="cargarMov($index,'OPC')"
 								data-target="#modalresguardo">
 
@@ -392,7 +411,7 @@
 				<tr ng-repeat="mov in otvo.comisiones" class="ng-scope">
 					<td class="ng-binding">{{mov.tipo}}</td>
 					<td class="ng-binding">{{mov.descripcion}}</td>
-					<td class="ng-binding">{{nombreBroker(mov.idCliente)}}</td>
+					<td><span ng-if="getbroker.length">{{nombreBroker(mov.idCliente)}}</span><span ng-if="!getbroker.length">- - -</span></td>
 					<td class="ng-binding">{{mov.monto | currency}}</td>
 					<td class="ng-binding">{{mov.empresa}}</td>
 					<td class="ng-binding">{{mov.banco}}</td>
@@ -404,7 +423,7 @@
 						ng-click="detalleCheque($index, 'OPA')"><b>Detalle</b></a></td>
 					<td class="ng-binding" align="right"><a class="btn btn-info"
 						data-toggle="tooltip" title="Descarga cheque"
-						ng-if="mov.tipo == 'Cheque' && mov.estatus!='CANCELADO'&& mov.banco!=null && mov.cuenta != null &&(perfil=='Ejecutivo' || perfil=='AdministradorRoot')"
+						ng-if="mov.tipo == 'Cheque' && mov.estatus!='CANCELADO'&& mov.banco!=null && mov.cuenta != null &&(perfil=='Ejecutivo' || perfil=='AdministradorRoot' || perfil=='Administrador')"
 						href="ots/imprimirCheque/{{mov.id}}" download="chequePDF.pdf">
 							<i class="glyphicon glyphicon-download-alt"></i>
 					</a></td>
@@ -418,7 +437,7 @@
 						</button>
 					</td>
 					<td class="ng-binding" align="right">
-						<button class="btn btn-small" data-toggle="modal"
+						<button name="btnEditar" class="btn btn-small" data-toggle="modal"
 							ng-if="perfil=='Administrador' || perfil=='AdministradorRoot'"
 							ng-show="permiso== true && mov.tipo != 'Efectivo' && mov.estatus != 'CANCELADO' && mov.estatus != 'VALIDADO' && (perfil=='Administrador' || perfil=='AdministradorRoot')"
 							ng-hide="(mov.tipo == 'Resguardo') || (mov.tipo == 'Resguardo' && mov.estatus == 'AUTORIZADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'VALIDADO')"
@@ -427,20 +446,27 @@
 						</button>
 					</td>
 					<td class="ng-binding" align="right">
-						<button class="btn btn-small" data-toggle="modal"
-							ng-if="perfil=='AdministradorRoot' || perfil=='Ejecutivo'"
-							ng-show="(mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo' &&  mov.estatus == 'AUTORIZADO') || (mov.tipo == 'Efectivo' && perfil=='Administrador') "
-							ng-hide="(mov.tipo == 'Resguardo' && mov.estatus == 'AUTORIZADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'VALIDADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'ACTIVO') || mov.estatus == 'CANCELADO'"
+						<button name="btnValidar" class="btn btn-small" data-toggle="modal"
+							ng-if="perfil=='AdministradorRoot' || perfil=='Ejecutivo' || perfil=='Administrador' "
+							ng-show="mov.tipo != 'Resguardo' && mov.estatus == 'AUTORIZADO'"
+							ng-hide="mov.tipo == 'Resguardo' || mov.estatus == 'VALIDADO' || mov.estatus == 'CANCELADO' || mov.estatus == 'ACTIVO'"
 							ng-disabled="mov.tipo != 'Efectivo' && mov.banco==null && mov.cuenta == null"
 							ng-click="cargarMov($index,'OPA')" data-target="#modalVerificar">
 							<span class="glyphicon glyphicon-ok"></span>
 						</button>
-						<div ng-if="mov.tipo == 'Resguardo' && mov.estatus != 'CANCELADO'">
+<!-- 						<button name="valid2" class="btn btn-small" data-toggle="modal" -->
+<!-- 							ng-if="perfil=='AdministradorRoot' || perfil=='Ejecutivo'" -->
+<!-- 							ng-show="(mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo' &&  mov.estatus == 'AUTORIZADO') || (mov.tipo == 'Efectivo' && perfil=='Administrador') " -->
+<!-- 							ng-hide="(mov.tipo == 'Resguardo' && mov.estatus == 'AUTORIZADO') ||  mov.estatus == 'VALIDADO') || (mov.tipo != 'Resguardo' && mov.estatus == 'ACTIVO') || mov.estatus == 'CANCELADO'" -->
+<!-- 							ng-disabled="mov.tipo != 'Efectivo' && mov.banco==null && mov.cuenta == null" -->
+<!-- 							ng-click="cargarMov($index,'OPA')" data-target="#modalVerificar"> -->
+<!-- 							<span class="glyphicon glyphicon-ok"></span> -->
+<!-- 						</button> -->
+						<div name="btnValidarResguardo" ng-if="mov.tipo == 'Resguardo' && mov.estatus != 'CANCELADO'">
 							<button class="btn btn-small" data-toggle="modal"
-								ng-if="perfil=='AdministradorRoot' || perfil=='Administrador'"
-								ng-show="(mov.tipo == 'Resguardo' )"
-								ng-hide="mov.tipo == 'Resguardo' && mov.estatus == 'VALIDADO'"
-								ng-disabled="mov.tipo != 'Efectivo' && mov.tipo != 'Resguardo'"
+								ng-if="perfil=='AdministradorRoot' || perfil=='Administrador' || perfil=='Ejecutivo'"
+								ng-show="(mov.tipo == 'Resguardo')"
+								ng-hide="mov.tipo != 'Resguardo' || mov.estatus == 'VALIDADO' || mov.estatus == 'CANCELADO'"
 								title="Validar Resguardo" ng-click="cargarMov($index,'OPA')"
 								data-target="#modalresguardo">
 

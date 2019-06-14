@@ -99,7 +99,7 @@
 					<tbody>
 						<tr ng-repeat="p in otVO.pagos">
 							<td>{{p.cliente}}</td>
-							<td>{{p.fecha}}</td>
+							<td>{{p.fecha | date}}</td>
 							<td>{{p.banco}}</td>
 							<td>{{p.cuenta}}</td>
 							<td>{{p.monto | currency}}</td>

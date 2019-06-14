@@ -587,6 +587,7 @@ app.controller("OTsAddController",['$rootScope', '$route','$scope','$cookieStore
 				return $scope.brokers[i].nombre;
 			}
 		}
+		return "";
 	}
 	
 	$scope.insBroker=function(data){
@@ -1770,17 +1771,9 @@ $scope.calcularComisiones=function(param){
 		$rootScope.perfilUsuario = userFactory.getUsuarioPerfil();  //obtener perfl de usuario para pintar el menú al qe tiene acceso
 		$scope.perfil=$rootScope.perfilUsuario;
 		console.log("el perfil", $scope.perfil);
+		$scope.closeOrder();
 	});	
-	$scope.$watch('empresaSearch',function(){
-		if($scope.empresaSearch.length>3){
-			$scope.zEmpresa();
-		}
-	},true);
-	$scope.$watch('empresaSearch2',function(){
-		if($scope.empresaSearch2.length>3){
-			$scope.nEmpresa();
-		}
-	},true);
+
 	
 	$scope.zEmpresa=function(){
 		ordenTrabajoservice.searchEmpresa($scope.empresaSearch).then(function(data){
@@ -1853,7 +1846,18 @@ $scope.calcularComisiones=function(param){
 		  });
 			
 	};
-	
+//	$scope.empresaSearch={length:0}
+//	$scope.empresaSearch2={length:0}
+	$scope.$watch('empresaSearch',function(){
+		if($scope.empresaSearch.length>3){
+			$scope.zEmpresa();
+		}
+	},true);
+	$scope.$watch('empresaSearch2',function(){
+		if($scope.empresaSearch2.length>3){
+			$scope.nEmpresa();
+		}
+	},true);
 	function cerrarOrden(){
 		var contM=0, contC=0;
 		for(var i in $scope.otvo.movimientos){
@@ -1998,6 +2002,16 @@ $scope.calcularComisiones=function(param){
 				});
 			}
 		}
+	}
+	$scope.closeOrder=function(){
+	if($scope.otvo.ot.estatus!="Cerrada"){	
+		if(cerrarOrden()){
+			$scope.otvo.ot.listaBrockers=$scope.getIdBk;
+			ordenTrabajoservice.cerrarOt($scope.otvo).then(function(data){
+				$window.location.reload();
+			});
+		}
+	}
 	}
 	$scope.validaMov=function(){
 		if(tipoOperacion=='OPC'){
@@ -2174,6 +2188,7 @@ $scope.calcularComisiones=function(param){
 				return $scope.getbroker[i].nickname;
 			}
 		}
+		return "";
 	}
 }]);	
 
