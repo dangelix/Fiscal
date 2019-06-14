@@ -375,7 +375,7 @@ public class OrdenDeTrabajoController {
 		AsignadorDeCharset.asignar(req, res);
 		HttpSession sesion= req.getSession();
 		Usuario user=(Usuario) sesion.getAttribute("user");
-		if(user.getPerfil().compareTo("Ejecutivo")==0 || user.getPerfil().compareTo("AdministradorRoot")==0){
+	//	if(user.getPerfil().compareTo("Ejecutivo")==0 || user.getPerfil().compareTo("AdministradorRoot")==0){
 			res.setContentType("Application/PDF");
 			OrdenDeTrabajoVO otvo=armaOTVO(id, false);
 			List<PagoRecibido> pagos= otvo.getPagos();
@@ -393,10 +393,10 @@ public class OrdenDeTrabajoController {
 			pdf.getDocument().close();
 			res.getOutputStream().flush();
 			res.getOutputStream().close();
-		}else{
-			String error = "Usuario sin permisos para realizar esta accion";
-			res.getWriter().print(JsonConvertidor.toJson(error));
-		}
+//		}else{
+//			String error = "Usuario sin permisos para realizar esta accion";
+//			res.getWriter().print(JsonConvertidor.toJson(error));
+//		}
 	}
 	
 	
