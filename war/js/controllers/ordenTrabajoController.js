@@ -1640,7 +1640,7 @@ $scope.calcularComisiones=function(param){
 //		console.log("linea 1261",$scope.getIdbk[0] );
 		console.log(data);	
 		crearListaDeCheques();
-		
+//		$scope.closeOrder();
 		var sumaMontoPagos =0;
 		 $scope.sumaMontoBrok =0;
 		for(var i in $scope.otvo.pagos){
@@ -1846,18 +1846,18 @@ $scope.calcularComisiones=function(param){
 		  });
 			
 	};
-//	$scope.empresaSearch={length:0}
-//	$scope.empresaSearch2={length:0}
 	$scope.$watch('empresaSearch',function(){
+		if($scope.empresaSearch){
 		if($scope.empresaSearch.length>3){
 			$scope.zEmpresa();
 		}
-	},true);
+	}},true);
 	$scope.$watch('empresaSearch2',function(){
+		if($scope.empresaSearch2){
 		if($scope.empresaSearch2.length>3){
 			$scope.nEmpresa();
 		}
-	},true);
+	}},true);
 	function cerrarOrden(){
 		var contM=0, contC=0;
 		for(var i in $scope.otvo.movimientos){
@@ -2004,13 +2004,18 @@ $scope.calcularComisiones=function(param){
 		}
 	}
 	$scope.closeOrder=function(){
+	if($scope.brokers){
 	if($scope.otvo.ot.estatus!="Cerrada"){	
 		if(cerrarOrden()){
 			$scope.otvo.ot.listaBrockers=$scope.getIdBk;
 			ordenTrabajoservice.cerrarOt($scope.otvo).then(function(data){
 				$window.location.reload();
 			});
+			
 		}
+	}
+	}else{
+		$window.location.reload();
 	}
 	}
 	$scope.validaMov=function(){

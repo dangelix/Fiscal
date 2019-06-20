@@ -300,6 +300,8 @@ app.controller("clientController",['$http','$interval','$rootScope','usuarioserv
 	$scope.guardaCliente= function(){
 		
 		$scope.client.enabled=true;
+		if(!$scope.client.apePaterno){$scope.client.apePaterno = "-"}
+		if(!$scope.client.apeMaterno){$scope.client.apeMaterno = "-"}
 		clientservice.guardarCliente($scope.client).then(function(data){
 			if(data=="OK"){
 				var x = document.getElementById("snackbar")
@@ -367,8 +369,8 @@ app.controller("clientController",['$http','$interval','$rootScope','usuarioserv
 				console.log(cliente);
 				clientservice.eliminaCliente(cliente).then(function(send) {	
 					alert("Cliente Eliminado");
-					$location.path("/clientes");
-//					$window.location.reload();
+//					$location.path("/clientes");
+					$window.location.reload();
 				}) 
 				
 			  

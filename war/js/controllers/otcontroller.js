@@ -102,8 +102,9 @@ app.controller("OTsListController",['$rootScope','$scope','$window', '$location'
 		$scope.cbtodos = data;
 	});
 	$scope.filtroOT=function(id){
+		$scope.ots = {}
 	otservice.FiltroOT(id).then(function(data){
-		$scope.ots=data;
+		$scope.ots[0]=data.ot;
 	});
 	}
 	$scope.$watch('busca',function(){
@@ -173,7 +174,7 @@ app.controller("OTsListController",['$rootScope','$scope','$window', '$location'
 			        return item;
 			    }
 			});
-			$('#searchBox').data('typeahead').source=$scope.encontrados;
+			$('#searchBoxLista').data('typeahead').source=$scope.encontrados;
 		});
 	}
 	$scope.zEmpresa=function(){
