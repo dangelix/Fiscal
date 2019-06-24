@@ -185,7 +185,7 @@ public class PDFot {
 		Phrase fraseContadorPDF = new Phrase();
 		celdaContadorPDF.setBackgroundColor(BaseColor.GRAY);
 		agregarChunkYNuevaLinea("Orden " + String.valueOf(fOT), font1, fraseContadorPDF);
-		agregarChunkYNuevaLinea("NO AUTORIZADA", font1, fraseContadorPDF);
+		agregarChunkYNuevaLinea(otvo.getOt().getEstatus(), font1, fraseContadorPDF);
 		celdaContadorPDF.setPhrase(fraseContadorPDF);
 		contadorPDF.addCell(celdaContadorPDF);
 		agregarCeldaSinBorde(String.valueOf(otvo.getOt().getFolioImpresion()), font1, contadorPDF, false);
@@ -290,7 +290,7 @@ public class PDFot {
 		Phrase fraseContadorPDF = new Phrase();
 		celdaContadorPDF.setBackgroundColor(BaseColor.GRAY);
 		agregarChunkYNuevaLinea("Orden " + String.valueOf(fOT), font1, fraseContadorPDF);
-		agregarChunkYNuevaLinea("NO AUTORIZADA", font1, fraseContadorPDF);
+		agregarChunkYNuevaLinea(otvo.getOt().getEstatus(), font1, fraseContadorPDF);
 		celdaContadorPDF.setPhrase(fraseContadorPDF);
 		contadorPDF.addCell(celdaContadorPDF);
 		agregarCeldaSinBorde(String.valueOf(otvo.getOt().getFolioImpresion()), font1, contadorPDF, false);
@@ -395,7 +395,8 @@ public class PDFot {
 				String nombre="Brocker";
 				cont++;
 				nombre = nombre + cont;
-				nombre = otvo.getBrokers().get(i).getNickname();
+			//	nombre = otvo.getBrokers().get(i).getNickname();
+				//if (nombre == null) nombre="";
 				agregarCeldaSinBorde(nombre, font3, tablaComisiones, true);
 				agregarCeldaSinBorde(String.valueOf(porBrokers[i]), font3, tablaComisiones, true);
 //				agregarCeldaSinBorde("$" + String.valueOf(montoBrokers[i]), font3, tablaComisiones, true);

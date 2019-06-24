@@ -1,6 +1,7 @@
 package com.tikal.fiscal.controllersRest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -213,6 +214,27 @@ public class LoadController {
 		System.out.println("---fin-------");
 	}
 	
+	@RequestMapping(value = { "/jj" }, method = RequestMethod.GET)
+	private void jj(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
+		System.out.println("---ini-------");
+		List<Cliente> clientes= clientedao.getAll_();
+		List<Cliente> nueva= new ArrayList<Cliente>();
+		Long aux=Long.parseLong("6116470106882048");
+		for (Cliente c:clientes){
+			if(c.getId()>aux){
+				nueva.add(c);
+			}
+		}
+		//Long.parseLong("5108068090118144")     
+		for (Cliente c:nueva){
+			 
+			c.setIdBrocker(Long.parseLong("5108068090118144"));
+			c.setResponsable(Long.parseLong("5108068090118144"));
+			clientedao.save(c);
+		}
+		System.out.println("---fin-------");
+	}
 	@RequestMapping(value = { "/idEmpresa" }, method = RequestMethod.GET)
 	private void n(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		//if(Util.verificarPermiso(re, usuariodao, perfildao, 2,0)){
